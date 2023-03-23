@@ -27,12 +27,13 @@ chrname = "chr3"
 file_path = "./specify/your/path/"
 genlouvain_df = pd.read_csv(file_path+chrname+"_gL_output.csv", index_col=0)
 ```
+
+Description of columns in files chrname+`_gL_output.csv`: 
+
 | Column name      | Description |
 | ----------- | ----------- |
 | Index | ID of a Hi-C bin, given in a consecutive order from 0 to last |
 | Bin_ID | the same as index |
-| Bin_size(100kb) | the length of a DNA segment length
-Each Hi-C bin has length of 1 (= 100 000 base pairs)
- |
-| 0.9, …, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3 | resolution parameter gamma for the GenLouvain algorithm. Column entries are community IDs for each bin_ID. If not given (NaN), then this bin was not assigned to a community |
-| Dom_ID | consecutive numbering of domains from 0 to last. A domain consists of linearly adjacent Hi-C bins that are assigned to the same community at all tested gammas. |
+| Bin_size(100kb) | the length of a DNA segment length. Each Hi-C bin has length of 1 (= 100 000 base pairs) |
+| 0.9, …, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3 | resolution parameter gamma for the GenLouvain algorithm. The column entries represent the community IDs for each bin_ID. If not given (NaN), then this bin was not assigned to a community |
+| Dom_ID | Irreducible domains are numbered consecutively from 0 to the last domain. A domain is defined as a group of linearly adjacent Hi-C bins that are members of the same community for each tested gamma (0.9, …, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3).|
