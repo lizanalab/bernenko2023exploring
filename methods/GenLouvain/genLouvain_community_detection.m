@@ -30,7 +30,6 @@ data = data.data;
 % Load chromosomes' length
 info = load(info_path);
 
-% SAVE CHR Hi-C map to the same folder where I will have community assignments
 fprintf('Data has been loaded for chr%s\n', num2str(chr1))
 
 % PLOT the HI-C map 
