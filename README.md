@@ -7,6 +7,16 @@ In this project, we analyze Hi-C data from the human GM12878 B-lymphoblastoid ce
 The Hi-C data was treated as a network. Using the generalized Louvain algorithm, we tune its resolution parameter to scan through the community size spectrum, from A/B compartments to topologically associated domains (TADs), and then construct a tree connecting these communities. The community partitions, as well as the partitions for the irreducible domains, are published in folder `data/3Dcommunities_GenLouvain_output_across_gamma`
 
 # METHODS
+In this repository, we provide code for community detection approach and other methods we describe in Methods Section of the manuscript.
+
+More specifically, we provide an implementation of the GenLouvain algorithm, a MATLAB script, for detecting communities in Hi-C networks.
+With the provided code, users can apply the algorithm to their own KR-normalized Hi-C datasets to identify communities of various size scales.
+
+We also provide Python script to calculate communities' nestedness based on formulae given in [A new measure of ecological network structure based on node overlap and segregation](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12395).
+Nestedness is a property of networks that quantifies the degree to which nodes with smaller degrees are "nested" within nodes with larger degrees. By calculating nestedness, users can gain insights into the underlying structure of communities and the relationships between them.
+
+To characterize communities, we calculate HMM's Enrichment Folds for each community. Here we provide the script to do it. Enrichment folds help users understand the significance of specific HMM states within a given sample (community). The script includes a hypergeometric test to determine the probability of observing a certain number of peaks of an HMM state in a community and calculates the states' enrichment folds.
+
 ## GenLouvain community detection algorithm
 _Script location:_ ```methods/GenLouvain/```<br>
 _Script name:_ ```genLouvain_community_detection.m```<br>
