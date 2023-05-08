@@ -3,7 +3,45 @@
 The goal of this project is to analyze the 3D structure of chromosomes using Hi-C data and network analysis techniques. Specifically, we aim to map out the chromosome's actual folding hierarchy by treating the measured DNA-DNA interactions as a weighted network and extracting 3D communities using the generalized Louvain algorithm.
 # METHODS
 ## GenLouvain community detection
-fill in
+_Script location:_ ```methods/GenLouvain/```<br>
+_Script name:_ ```genLouvain_community_detection.m```<br>
+
+_Description:_ This MATLAB script analyzes Hi-C data to detect communities in chromosomes using the GenLouvain community partition method. It can process both intrachromosomal and interchromosomal Hi-C data.
+
+_I. How to use this script?_<br>
+To use this code, first specify which Hi-C data (chromosome name) will be partitioned into communities.
+```matlab
+chr1 = 10; %choose the first chromosome
+chr2 = 10; %choose the second chromosome (for interchromsomal Hi-C) or repeat the first one (for intrachromosomal Hi-C)
+```
+
+Next, ensure that the Hi-C data and chromosome length information are available in the specified paths:
+```matlab
+data_path = ['/MATLAB Drive/mapping2023bernenko/HiC_data/chr' num2str(chr1) '_dna_00per.mat']
+info_path = ['/MATLAB Drive/mapping2023bernenko/HiC_data/chr_' num2str(chr1) '.data.info']
+```
+For example, data for chromosome 10 are in files ```chr10_dna_00per.mat``` and ```chr_10.data.info```, and both files are located in folder ```methods/GenLouvain/HiC_data```
+
+Afterwards, set the parameters:<br>
+```alpha```: The exponent of the decay of contact frequencies between node i and node j. Default value is 1<br>
+```gamma```: The resolution parameter, which can be set to a single value (for example 0.6) or a range of values (example is below).
+```matlab
+alpha = 1; % FIX one parameter
+
+for gamma = 0.6% [0.4, 0.5, 0.6, 0.7, 0.8, 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.9] ```
+```
+Last, run the algorithm. It will save the data into folder ```methods/GenLouvain/gL_partitions```
+
+_II. Output_<br>
+The script saves the community assignments for nodes in a .mat file in the gL_partitions directory, with the naming format chr{chr1}_gamma{gamma_n}_alpha{alpha_n}.mat.<br>
+
+The output file contains:<br>
+**ROWS**<br>
+representing nodes;<br>
+**COLUMNS**<br>
+_column#1_ contains nodes' community assignment,<br>
+_column#2_ is a chromosome name,<br>
+_column#3_ is a modularity of the partition (not normalized).
 
 ## Nestedness
 fill in
