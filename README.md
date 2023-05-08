@@ -68,8 +68,25 @@ For details, see Section II.C "Network nestedness" of the manuscript.<br>
 The code that implements formulae 3--10 is exported from the module ```methods/nestedness/utils/nestedness.py``` 
 
 ## Hypergeometric test and HMM's enrichment folds
-fill in
+_Script location:_```methods/hypergeometric_test```<br>
+_Script name:_```hypergeometric_test_calculation```<br>
 
+_Description:_ This Python script calculates the hypergeometric test for a given population, sample, and number of successful items. It computes the cumulative probability, confidence interval, mean, and enrichment folds.
+
+_Input Parameters_<br>
+```N:``` The number of items in the population.<br>
+```k:``` The number of items in the population that are classified as successes.<br>
+```n:``` The number of items in the sample.<br>
+```x:``` The number of items in the sample that are classified as successes.
+
+_Output_<br>
+The script prints the following information:<br>
+1. Cumulative probability for drawing the given number of successful items.
+2. Confidence interval for the given alpha level.
+3. Hypergeometric mean.
+4. Enrichment folds for the given case.
+
+For details about method implementation, please, see Section II.D "Chromatin states and folds of enrichment"
 # DATA
 ## Hi-C data
 In this project, we analyze Hi-C data from the human GM12878 B-lymphoblastoid cell line. We obtained published data from Gene Expression Omnibus (accession number is `GSE63525`). We normalized the Hi-C data using Knight-Ruiz Matrix Balancing (KR) algorithm implemented in `gcMapExplorer`.We present KR-normalized Hi-C data for chromosomes 3, 5, 10, and 22 in the folder `Hi-C_data_KR_norm_chr3-5-10-22`.
