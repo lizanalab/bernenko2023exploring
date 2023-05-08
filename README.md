@@ -43,6 +43,7 @@ _column#1_ contains nodes' community assignment,<br>
 _column#2_ is a chromosome name,<br>
 _column#3_ is a modularity of the partition (not normalized).
 
+For details of implementation, see Section II.B "The GenLouvain algorithm -- detecting 3D communities in Hi-C data"
 ## Nestedness
 
 _Script location:_ ```methods/nestedness```<br>
