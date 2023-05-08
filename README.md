@@ -1,7 +1,17 @@
 #     Mapping the semi-nested community structure of 3D chromosome contact networks
 
 The goal of this project is to analyze the 3D structure of chromosomes using Hi-C data and network analysis techniques. Specifically, we aim to map out the chromosome's actual folding hierarchy by treating the measured DNA-DNA interactions as a weighted network and extracting 3D communities using the generalized Louvain algorithm.
+# METHODS
+## GenLouvain community detection
+fill in
 
+## Nestedness
+fill in
+
+## Hypergeometric test and enrichment folds
+fill in
+
+# DATA
 ## Hi-C data
 In this project, we analyze Hi-C data from the human GM12878 B-lymphoblastoid cell line. We obtained published data from Gene Expression Omnibus (accession number is `GSE63525`). We normalized the Hi-C data using Knight-Ruiz Matrix Balancing (KR) algorithm implemented in `gcMapExplorer`.We present KR-normalized Hi-C data for chromosomes 3, 5, 10, and 22 in the folder `Hi-C_data_KR_norm_chr3-5-10-22`.
 
