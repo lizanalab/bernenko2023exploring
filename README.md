@@ -2,11 +2,11 @@
 
 The goal of this project is to analyze the 3D structure of chromosomes using Hi-C data and network analysis techniques. Specifically, we aim to map out the chromosome's actual folding hierarchy by treating the measured DNA-DNA interactions as a weighted network and extracting 3D communities using the generalized Louvain algorithm.
 # METHODS
-## GenLouvain community detection
+## GenLouvain community detection algorithm
 _Script location:_ ```methods/GenLouvain/```<br>
 _Script name:_ ```genLouvain_community_detection.m```<br>
 
-_Description:_ This MATLAB script analyzes Hi-C data to detect communities in chromosomes using the GenLouvain community partition method. It can process both intrachromosomal and interchromosomal Hi-C data.
+_Description:_ This MATLAB script analyzes Hi-C data, more specifically, it detects communities in chromosomes using the GenLouvain community partition method.
 
 _I. How to use this script?_<br>
 To use this code, first specify which Hi-C data (chromosome name) will be partitioned into communities.
@@ -44,9 +44,30 @@ _column#2_ is a chromosome name,<br>
 _column#3_ is a modularity of the partition (not normalized).
 
 ## Nestedness
-fill in
 
-## Hypergeometric test and enrichment folds
+_Script location:_ ```methods/nestedness```<br>
+_Script name:_ ```nestedness_Nij_calculation```
+
+_Description:_ This Python script calculates the nestedness coefficient between two communities in a network based on their shared nodes. It also computes the expected number of shared nodes, probabilities, and various coefficients.
+
+_Input Parameters_<br>
+```nodes_shared:``` Number of shared nodes between community i and community j.<br>
+```k_i:``` Degree of community i.<br>
+```k_j:``` Degree of community j.<br>
+```n_tot_num_nodes:``` Total number of domains in the network.
+
+_Output_<br>
+The script prints the following information:<br>
+1. Expected number of shared nodes.<br>
+2. W coefficient.<br>
+3. Omega coefficient.<br>
+4. Nestedness coefficient, N.<br>
+5. Probabilities (less, exact, greater).
+
+For details, see Section II.C "Network nestedness" of the manuscript.<br>
+The code that implements formulae 3--10 is exported from the module ```methods/nestedness/utils/nestedness.py``` 
+
+## Hypergeometric test and HMM's enrichment folds
 fill in
 
 # DATA
