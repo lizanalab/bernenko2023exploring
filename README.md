@@ -1,12 +1,18 @@
 #     Mapping the semi-nested community structure of 3D chromosome contact networks
 
 The goal of this project is to analyze the 3D structure of chromosomes using Hi-C data and network analysis techniques. Specifically, we aim to map out the chromosome's actual folding hierarchy by treating the measured DNA-DNA interactions as a weighted network and extracting 3D communities using the generalized Louvain algorithm.
+
+In this project, we analyze Hi-C data from the human GM12878 B-lymphoblastoid cell line. We obtained published data from Gene Expression Omnibus (accession number is `GSE63525`). We normalized the Hi-C data using Knight-Ruiz Matrix Balancing (KR) algorithm implemented in `gcMapExplorer`.We present KR-normalized Hi-C data for chromosomes 3, 5, 10, and 22 in the folder `data/Hi-C_data_KR_norm_chr3-5-10-22`.
+
+The Hi-C data was treated as a network. Using the generalized Louvain algorithm, we tune its resolution parameter to scan through the community size spectrum, from A/B compartments to topologically associated domains (TADs), and then construct a tree connecting these communities. The community partitions, as well as the partitions for the irreducible domains, are published in folder `data/3Dcommunities_GenLouvain_output_across_gamma`
+
 # METHODS
 ## GenLouvain community detection algorithm
 _Script location:_ ```methods/GenLouvain/```<br>
 _Script name:_ ```genLouvain_community_detection.m```<br>
 
-_Description:_ This MATLAB script analyzes Hi-C data, more specifically, it detects communities in chromosomes using the GenLouvain community partition method.
+_Description:_ This MATLAB script detects communities in chromosomes' Hi-C data using the GenLouvain community partition method.
+For details of implementation, see Manuscript's Section II.B "The GenLouvain algorithm -- detecting 3D communities in Hi-C data"
 
 _I. How to use this script?_<br>
 To use this code, first specify which Hi-C data (chromosome name) will be partitioned into communities.
@@ -43,13 +49,14 @@ _column#1_ contains nodes' community assignment,<br>
 _column#2_ is a chromosome name,<br>
 _column#3_ is a modularity of the partition (not normalized).
 
-For details of implementation, see Section II.B "The GenLouvain algorithm -- detecting 3D communities in Hi-C data"
 ## Nestedness
 
 _Script location:_ ```methods/nestedness```<br>
 _Script name:_ ```nestedness_Nij_calculation```
 
 _Description:_ This Python script calculates the nestedness coefficient between two communities in a network based on their shared nodes. It also computes the expected number of shared nodes, probabilities, and various coefficients.
+For details, see Section II.C "Network nestedness" of the manuscript.<br>
+The code that implements formulae 3--10 is exported from the module ```methods/nestedness/utils/nestedness.py``` 
 
 _Input Parameters_<br>
 ```nodes_shared:``` Number of shared nodes between community i and community j.<br>
@@ -64,9 +71,6 @@ The script prints the following information:<br>
 3. Omega coefficient.<br>
 4. Nestedness coefficient, N.<br>
 5. Probabilities (less, exact, greater).
-
-For details, see Section II.C "Network nestedness" of the manuscript.<br>
-The code that implements formulae 3--10 is exported from the module ```methods/nestedness/utils/nestedness.py``` 
 
 ## Hypergeometric test and HMM's enrichment folds
 _Script location:_```methods/hypergeometric_test```<br>
@@ -88,15 +92,9 @@ The script prints the following information:<br>
 4. Enrichment folds for the given case.
 
 For details about method implementation, please, see Section II.D "Chromatin states and folds of enrichment"
-# DATA
+# DATA, how to read the files
 ## Hi-C data
-In this project, we analyze Hi-C data from the human GM12878 B-lymphoblastoid cell line. We obtained published data from Gene Expression Omnibus (accession number is `GSE63525`). We normalized the Hi-C data using Knight-Ruiz Matrix Balancing (KR) algorithm implemented in `gcMapExplorer`.We present KR-normalized Hi-C data for chromosomes 3, 5, 10, and 22 in the folder `Hi-C_data_KR_norm_chr3-5-10-22`.
-
-## 3D communities of the Hi-C network
-In this project, the Hi-C data was treated as a network. Using the generalized Louvain algorithm, we tune its resolution parameter to scan through the community size spectrum, from A/B compartments to topologically associated domains (TADs), and then construct a hierarchical tree connecting these communities. The community partitions, as well as the partitions for the irreducible domains, are published in folder `3Dcommunities_GenLouvain_output_across_gamma`
-
-## Reading data from files
-Code snippet in Python to read Hi-C data from file `chr3_dna_00per.mat`
+Code snippet in Python to read Hi-C data from file `./data/Hi-C_data_KR_norm_chr3-5-10-22/chr3_dna_00per.mat`
 
 ```python
 import scipy.io as sio
@@ -106,7 +104,8 @@ adj = sio.loadmat(file_path + chrname +"_dna_00per.mat")
 adj = adj['data']
 ```
 
-Code snippet in Python to read from file `chr3_gL_output.csv` that stores the community partitions for the range of gamma values (resolution parameter) and corresponding irreducible domains.
+## 3D communities of the Hi-C network
+Code snippet in Python to read from file `./data/3Dcommunities_GenLouvain_output_across_gamma/chr3_gL_output.csv` that stores the community partitions for the range of gamma values (resolution parameter) and corresponding irreducible domains.
 
 ```python
 import pandas as pd
@@ -115,7 +114,7 @@ file_path = "./specify/your/path/"
 genlouvain_df = pd.read_csv(file_path+chrname+"_gL_output.csv", index_col=0)
 ```
 
-Description of columns in files chrname+`_gL_output.csv`: 
+Description of columns in a file `chr3_gL_output.csv`: 
 
 | Column name      | Description |
 | ----------- | ----------- |
