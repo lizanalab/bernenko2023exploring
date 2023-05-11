@@ -2,9 +2,11 @@
 
 The goal of this project is to analyze the 3D structure of chromosomes using Hi-C data and network analysis techniques. Specifically, we aim to map out the chromosome's actual folding hierarchy by treating the measured DNA-DNA interactions as a weighted network and extracting 3D communities using the generalized Louvain algorithm.
 
-In this project, we analyze Hi-C data from the human GM12878 B-lymphoblastoid cell line. We obtained published data from Gene Expression Omnibus (accession number is `GSE63525`). We normalized the Hi-C data using Knight-Ruiz Matrix Balancing (KR) algorithm implemented in `gcMapExplorer`.We present KR-normalized Hi-C data for chromosomes 3, 5, 10, and 22 in the folder `data/Hi-C_data_KR_norm_chr3-5-10-22`.
+In this project, we analyze Hi-C data from the human GM12878 B-lymphoblastoid cell line. We obtained published data from Gene Expression Omnibus (accession number is `GSE63525`). We normalized the Hi-C data using Knight-Ruiz Matrix Balancing (KR) algorithm implemented in `gcMapExplorer`.  We present KR-normalized Hi-C data for chromosomes 3, 5, 10, and 22 in the folder `data/Hi-C_data_KR_norm_chr3-5-10-22`.
 
-The Hi-C data was treated as a network. Using the generalized Louvain algorithm, we tune its resolution parameter to scan through the community size spectrum, from A/B compartments to topologically associated domains (TADs), and then construct a tree connecting these communities. The community partitions, as well as the partitions for the irreducible domains, are published in folder `data/3Dcommunities_GenLouvain_output_across_gamma`
+The Hi-C data was treated as a network. Using the generalized Louvain algorithm, we tune its resolution parameter to scan through the community size spectrum, from A/B compartments to topologically associated domains (TADs), and then construct a tree connecting these communities. The community partitions, as well as the partitions for the irreducible domains, are published in folder `data/3Dcommunities_GenLouvain_output_across_gamma`.
+
+We encourage users to contact the developers should problems arise.
 
 # METHODS
 In this repository, we provide code for community detection approach and other methods we describe in Methods Section of the manuscript.
